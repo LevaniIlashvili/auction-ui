@@ -7,6 +7,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <AuctionListPage />,
   },
+  {
+    path: "/auctions/:auctionId",
+    element: <AuctionDetailsPage />,
+  },
 ]);
 
 export const AppRouter = () => <RouterProvider router={router} />;
