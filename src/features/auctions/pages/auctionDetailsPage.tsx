@@ -2,10 +2,16 @@ import { useParams } from "react-router-dom";
 import { useAuctionDetails } from "../hooks/useAuctionDetails";
 import BidHistory from "../components/bidHistory";
 import BidForm from "../components/bidForm";
+import { useBidUpdates } from "../hooks/useBidUpdates";
 
 export default function AuctionDetailsPage() {
   const { auctionId } = useParams<{ auctionId: string }>();
-  const { data: auction, isLoading, error } = useAuctionDetails(auctionId!);
+
+  if (!auctionId) return <div>Auction ID missing</div>;
+
+  const { data: auction, isLoading, error } = useAuctionDetails(auctionId);
+
+  useBidUpdates(auctionId);
 
   if (isLoading) return <div>Loading...</div>;
   if (error || !auction) return <div>Error!</div>;
