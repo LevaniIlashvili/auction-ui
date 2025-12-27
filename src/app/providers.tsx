@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
+import { SignalRProvider } from "./SignalRProvider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -12,6 +13,8 @@ const queryClient = new QueryClient({
 
 export const Providers = ({ children }: { children: ReactNode }) => {
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <SignalRProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </SignalRProvider>
   );
 };
